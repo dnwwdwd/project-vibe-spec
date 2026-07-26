@@ -1,0 +1,14 @@
+# 文档地图
+
+## 优先级与实际路径
+
+| 职责 | 实际路径 | 更新触发条件 |
+|---|---|---|
+| 项目协作契约 | `AGENTS.md` | 规则、提交范围、构建或文档流程变化 |
+| 需求台账 | `Requirements/LEDGER.md` | 每个非 Bug 需求 |
+| Bug 台账 | `docs/BUG_TRACKER.md` | 发现、修复或验证 Bug |
+| 产品设计 | `docs/PDD.md` | 产品行为、范围或用户流程变化 |
+| 技术规格 | `docs/PRD.md` | 实现、架构、接口、数据或兼容变化 |
+| UI 规范 | `docs/UI_GUIDE.md` | UI、交互或响应式规则变化 |
+| 业务流程 | `docs/<domain>_BUSINESS_FLOW.md` | 业务、Agent、检索或数据流变化 |
+| 项目进度 | `docs/PROGRESS.md` | 当前口径或里程碑变化 |

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Vibe Spec"
+  short_description: "Create traceable project delivery rules and workflows"
+  default_prompt: "Use $project-vibe-spec to establish or follow this repository project contract."

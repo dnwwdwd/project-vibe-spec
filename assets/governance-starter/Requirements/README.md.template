@@ -1,0 +1,8 @@
+# Requirements
+
+本目录记录非 Bug 需求。
+
+- `LEDGER.md`：全部非 Bug 需求的总台账。
+- `REQ-YYYYMMDD-NNN.md`：复杂、长期或跨模块需求的详细记录。
+
+分类：功能需求、功能优化、用户体验优化。Bug 统一记录到 Bug 台账。
