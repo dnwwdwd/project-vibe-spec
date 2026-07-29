@@ -1,4 +1,4 @@
 interface:
   display_name: "Project Vibe Spec"
-  short_description: "Create traceable project delivery rules and workflows"
-  default_prompt: "Use $project-vibe-spec to establish or follow this repository project contract."
+  short_description: "确认需求与数据方案的可追溯项目交付流程"
+  default_prompt: "Use $project-vibe-spec to review this repository's contract, confirm requirements and data decisions before implementation, and keep progress and documentation traceable."
