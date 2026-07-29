@@ -6,9 +6,9 @@
 
 ## 包含内容
 
-- `SKILL.md`：首次接入、需求确认、数据设计确认、计划、进度、文档联动、验证与交付规则。
+- `SKILL.md`：首次接入、需求确认、跨模块影响分析、数据设计确认、计划、进度、文档联动、验证与交付规则。
 - `assets/governance-starter/`：新项目可复制的项目契约、目录索引、需求、决策、Bug、PDD、PRD、UI、项目进度、功能进度和业务流程模板。
-- `references/document-maintenance.md`：文档职责、更新矩阵和记录关联规则。
+- `references/document-maintenance.md`：文档职责、更新矩阵、跨模块记录与行为验收规则。
 - `references/decision-gates.md`：需求、数据表与 DDL 变更的方案确认清单。
 
 ## 安装
