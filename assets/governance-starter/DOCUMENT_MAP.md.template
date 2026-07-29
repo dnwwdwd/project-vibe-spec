@@ -1,14 +1,29 @@
 # 文档地图
 
+> 本表是文档职责到仓库实际路径的唯一索引。首次接入时按现有目录填写；路径可以和平铺模板不同，但每项职责只能有一个当前事实来源。
+
 ## 优先级与实际路径
 
 | 职责 | 实际路径 | 更新触发条件 |
 |---|---|---|
 | 项目协作契约 | `AGENTS.md` | 规则、提交范围、构建或文档流程变化 |
+| 文档地图 | `DOCUMENT_MAP.md` | 创建、替换或移动文档/目录 |
 | 需求台账 | `Requirements/LEDGER.md` | 每个非 Bug 需求 |
+| 详细需求记录 | `Requirements/REQ-*.md` | 复杂、长期或跨模块需求 |
+| 决策台账 | `Decisions/LEDGER.md` | 数据、架构、API、外部依赖或难以回退的方案 |
+| 决策记录 | `Decisions/DEC-*.md` | 提出、确认、调整或归档重大方案 |
 | Bug 台账 | `docs/BUG_TRACKER.md` | 发现、修复或验证 Bug |
 | 产品设计 | `docs/PDD.md` | 产品行为、范围或用户流程变化 |
 | 技术规格 | `docs/PRD.md` | 实现、架构、接口、数据或兼容变化 |
 | UI 规范 | `docs/UI_GUIDE.md` | UI、交互或响应式规则变化 |
 | 业务流程 | `docs/<domain>_BUSINESS_FLOW.md` | 业务、Agent、检索或数据流变化 |
-| 项目进度 | `docs/PROGRESS.md` | 当前口径或里程碑变化 |
+| 项目进度 | `docs/PROGRESS.md` | 当前口径或项目里程碑变化 |
+| 功能进度台账 | `Progress/LEDGER.md` | 大任务创建、阶段状态或归档变化 |
+| 功能进度记录 | `Progress/PROG-<REQ-ID>-<slug>.md` | 大任务的阶段计划、进度、DoD、证据或阻塞变化 |
+
+## 首次接入记录
+
+- 接入日期：YYYY-MM-DD
+- 沿用的既有目录/文档：
+- 新建的缺失职责：
+- 不适用职责及理由：

@@ -1,70 +1,92 @@
 ---
 name: project-vibe-spec
-description: Establish and follow a durable project contract for Vibe Coding. Use when creating, modifying, planning, reviewing, debugging, documenting, testing, packaging, or shipping work in a software repository, especially when the project needs requirements tracking, bug triage, synchronized product and technical documentation, safe Git scope, and verifiable delivery.
+description: 为 Vibe Coding 项目建立可追溯、经确认的协作契约。用于软件仓库的新建、修改、规划、排障、文档、测试、打包和交付；尤其适合需要需求台账、数据设计确认、进度治理与安全 Git 范围的项目。
 ---
 
 # Project Vibe Spec
 
-Create a traceable delivery loop without replacing the repository's existing rules. Treat project-specific instructions as authoritative; use the starter templates only when the repository lacks an equivalent document.
+把用户意图、现有业务、设计决策、实现、验证和文档维持在同一条可追溯链路上。仓库已有的项目规则优先；模板只补齐缺失职责，不能用通用结构覆盖已有约定。
 
-## 1. Discover the contract
+## 1. 首次接入：先建立或接管项目契约
 
-Before changing code, configuration, documentation, or UI:
+首次在一个仓库使用本 Skill 时，先完成契约审视，再进行任何实质实现：
 
-1. Read applicable `AGENTS.md` files from the repository root upward.
-2. Read the project's document map, requirements ledger, bug tracker, progress report, product/technical/UI documents, and affected business-flow documents.
-3. Inspect the relevant implementation, tests, configuration, and build scripts.
-4. Resolve conflicts using the project's documented priority order. State the selected rule if the conflict affects the delivery.
+1. 从仓库根目录向上读取适用的 `AGENTS.md`，检查仓库内的 `README`、`docs/`、需求、设计、进度、测试、迁移与构建文件。
+2. 查找每项治理职责是否已有近似目录或文档：项目规则、文档地图、需求、Bug、产品、技术、UI、业务流程、决策记录、项目进度与功能进度。
+3. 已有近似目录时，沿用该目录作为平替；补充缺失文档或字段。不要额外复制一套平行的 `docs/`、`Requirements/` 或 `Progress/`。
+4. 没有可用等价物时，从 [assets/governance-starter](assets/governance-starter) 复制所需模板，并替换占位内容。
+5. 创建或更新仓库根目录的 `DOCUMENT_MAP.md`。它是职责到实际路径的唯一索引，必须写出每个文档或目录的真实位置。
+6. 创建或更新仓库根目录的 `AGENTS.md`：保留已有项目规则，补入文档优先级、`DOCUMENT_MAP.md` 的路径，以及开始任务时必须读取的项目索引。`AGENTS.md` 只写行为和索引，不复制产品、数据库或实现细节。
 
-If the project has no contract, copy the starter files from [assets/governance-starter](assets/governance-starter) and tailor `AGENTS.md` plus `DOCUMENT_MAP.md` before substantial implementation. Read [references/document-maintenance.md](references/document-maintenance.md) for the update matrix.
+首次接入结束后，向用户说明：沿用或创建了哪些目录、`DOCUMENT_MAP.md` 的实际路径，以及仍缺少哪些项目事实。完整模板的职责与更新矩阵见 [references/document-maintenance.md](references/document-maintenance.md)。
 
-## 2. Classify and record the work
+## 2. 每次任务先确认事实与需求
 
-Classify each independent request before implementation:
+在修改代码、配置、数据库、文档或 UI 前：
 
-- **Bug**: an existing promise, design, or implementation fails. Record it in the bug tracker.
-- **Feature**: adds a capability, page, interface, flow, configuration, or rule. Record it in the requirements ledger.
-- **Functional improvement**: strengthens or changes an existing capability, boundary, or process. Record it in the requirements ledger.
-- **UX improvement**: improves interaction, visual hierarchy, copy, feedback, defaults, or comprehension. Record it in the requirements ledger.
-- **Packaging only**: do not create a product requirement or bug record unless the project explicitly requires it.
+1. 阅读根目录 `AGENTS.md`、`DOCUMENT_MAP.md`、相关需求/决策/进度/产品/技术/UI/业务流程文档，以及受影响实现、测试、配置、迁移和构建脚本。
+2. 梳理现有业务：用户从哪里进入、当前主流程和状态如何流转、权限与数据边界在哪里、现有代码为何这样实现。
+3. 分类请求：Bug 写入 Bug 台账；功能、功能优化、体验优化写入需求台账；仅重新构建或打包默认不建需求记录，除非项目另有约定。混合请求要拆开记录。
+4. 对用户复述已理解的目标、范围、不做的内容、验收标准、受影响数据/权限/兼容性和仍未知的事项。用户描述已完整且风险很低时，可把这份确认写入需求记录后继续；未知事项会改变产品范围、数据语义、权限、安全、兼容性或成本时，必须先向用户询问并得到明确答复。
+5. 基于已确认事实制定最小完整方案：改哪些层、复用什么、各步的依赖、风险、验证方法和需要同步的文档。需求本身有多个合理方向、会改变公开行为或会产生难以回退的影响时，先给出可选方案、推荐项和理由，等用户确认再实现。
 
-Split mixed bug and improvement requests. Create a detailed requirement record for broad, long-running, or cross-module work. Read [references/document-maintenance.md](references/document-maintenance.md) before choosing documents to update.
+不得用“看起来合理”替代需求确认；不得只读需求文本而跳过现有代码和业务流程；不得在文档和实现冲突时静默猜测。按仓库约定的优先级处理冲突，并在交付中说明。
 
-## 3. Implement within confirmed boundaries
+## 3. 数据设计与数据库变更是独立确认关卡
 
-- Confirm product scope, data, permissions, security, compatibility, and runtime constraints before designing the change.
-- Make the smallest complete change. Preserve unrelated user changes.
-- Reuse the repository's established abstractions, dependencies, and platform boundaries.
-- Keep credentials, local data, generated artifacts, dependencies, and logs out of version control unless the project explicitly includes them.
-- Identify exact targets before destructive actions. Prefer recoverable actions.
+新增持久化数据、修改表/字段/索引/约束/关系、迁移已有数据或删除数据前，必须先和用户讨论，不能自主执行 DDL、迁移或等效的 ORM schema 变更。
 
-Stop for direction when a missing decision would materially expand the product scope, change external state, or make an unsafe assumption.
+先调查当前表结构、数据量和数据质量、实体关系、读写路径、API/任务/报表依赖、保留与删除策略及上线约束。随后给出可讨论的书面方案，至少包含：
 
-## 4. Synchronize the source of truth
+- 要解决的业务问题、涉及的用户流程和现有约束；
+- 可选方案及其取舍；
+- 推荐方案与具体理由；
+- 拟议的数据模型：实体、字段、类型、可空性、默认值、主键/外键、唯一与检查约束、索引和关系；
+- 拟议 DDL 或 schema diff，明确标注为“待确认”，不能当作已经执行；
+- 迁移步骤、历史数据回填/双写策略、兼容窗口、性能影响、备份与回滚方案；
+- 需要用户拍板的业务含义，例如数据归属、保留期、删除规则和权限。
 
-Update documentation with implementation rather than after it:
+将方案写入需求记录或决策记录，关联对应 REQ。用户明确确认某一方案后，才可编写或修改 migration、DDL、ORM schema、数据访问代码和依赖它们的 API/UI。确认后如发现方案不成立或要扩大表结构影响，暂停实现，给出新方案并再次确认。详细清单见 [references/decision-gates.md](references/decision-gates.md)。
 
-| Change | Update when affected |
-|---|---|
-| Product behavior, scope, or user flow | PDD and requirement record |
-| Architecture, API, data, runtime, or compatibility | PRD and affected flow documents |
-| UI, interaction, copy, defaults, or responsive behavior | UI Guide |
-| Agent, search, indexing, automation, or data flow | affected business-flow documents |
-| Bug investigation or repair | bug tracker |
-| Milestone or current project position | progress report |
+## 4. 大任务按计划和进度文档推进
 
-Use the paths declared in the repository's document map. Do not retain conflicting old and new product statements. State why a relevant document remains unchanged when that would otherwise be ambiguous.
+跨多个模块、包含多个阶段、需要多轮会话、涉及数据/迁移/外部系统，或无法在一个可验证闭环内完成的任务，视为大任务。
 
-## 5. Validate and deliver
+1. 先建立详细需求记录，写清范围、确认口径、依赖、验收标准和方案。
+2. 建立功能专属进度文档，按项目目录约定存放；记录位置必须同时写入需求台账与功能进度台账。没有既有目录时，使用 `Progress/PROG-<REQ-ID>-<slug>.md`。
+3. 把任务拆成可验证的阶段。每个阶段写明目标、前置条件、交付物、验证证据、完成定义（DoD）、风险和下一步。
+4. 开工前把阶段计划和风险告知用户；遇到关键路径、范围、数据模型、公开契约或实施顺序变化时，先说明影响并获得确认。
+5. 开始、完成或阻塞某个阶段时，同步更新功能进度文档和功能进度台账；需求完成后保留最终结果、验证证据、遗留项与归档链接，不能只把状态改成“已完成”。
 
-Run the smallest sufficient checks for the risk: focused tests, static checks, build, and an affected user path when practical. Never describe an unrun check as passing.
+小任务也要在需求或 Bug 记录中留下状态和验证结果；它们通常无需单独的功能进度文档。
 
-Before staging or publishing, inspect the worktree, branch, remotes, ignored files, and project-specific public/private submission scope. Stage only intended files. Push, deploy, release, or open a pull request only with user authorization.
+## 5. 在确认边界内实现
 
-In the final handoff, lead with the completed outcome and include:
+- 按最小完整纵向切片推进：文档与决策 → 数据模型/迁移（如已确认）→ 服务 → API → UI → 测试 → 文档和进度。
+- 复用仓库既有抽象、依赖、命名和平台边界。保持无关用户改动不受影响，不顺手重构，也不为未确认需求预建复杂能力。
+- 先识别破坏性操作的精确目标，优先选择可恢复操作。密钥、环境变量、本地数据、数据库、日志、依赖目录和构建产物不纳入版本控制，除非项目明确要求。
+- 用户尚未确认的事项可以调查、提出方案和更新“待确认”文档；不得把它实现成既定事实。
 
-- behavior changed;
-- key files and documents changed;
-- requirement or bug record updated;
-- commands run and their results;
-- remaining verification, risk, or user decision.
+## 6. 实现与文档同步
+
+实现过程中同步更新事实来源，而非最后补写：
+
+| 变化 | 必须更新 | 按需更新 |
+|---|---|---|
+| 新增功能或流程优化 | 需求记录、PDD、PRD | 业务流程、UI Guide、项目/功能进度 |
+| UI 或交互优化 | 需求记录、UI Guide | PDD、PRD、业务流程、进度 |
+| 数据模型、架构、接口、检索、Agent 或运行时变化 | 需求记录、决策记录、PDD、PRD、业务流程 | UI Guide、项目/功能进度 |
+| Bug 修复 | Bug 台账 | PDD、PRD、UI Guide、业务流程、进度 |
+| 仅构建或重新打包 | 无，除非项目另有规定 | 发布说明 |
+
+使用 `DOCUMENT_MAP.md` 声明的实际路径。相关文档不需要更新时，在需求或交付记录中写明理由，避免留下互相冲突的口径。
+
+## 7. 验证与交付
+
+按风险运行最小充分检查：聚焦测试、静态检查、构建，以及可行时的受影响用户路径。不得把未运行的检查描述为通过。
+
+已确认的数据迁移还要验证：能从项目支持的上一版本升级，约束和回填符合方案，失败路径可按既定步骤恢复；只有项目明确支持时才验证回滚。不得把生产数据当作验证环境。
+
+暂存、提交或发布前检查工作区、分支、远程、忽略规则和项目规定的公开/私有范围，只暂存当前任务文件。推送、部署、发布与创建 PR 需要用户授权。
+
+交付时先说明结果，再列出：行为和决策；修改的关键代码与文档；需求/Bug/进度记录；运行过的命令和结果；未验证部分、风险、阻塞项与仍需用户决定的事项。
