@@ -1,4 +1,4 @@
 interface:
   display_name: "Project Vibe Spec"
   short_description: "建立项目契约、PRD/PDD 对齐总进度和可追溯交付记录"
-  default_prompt: "Use $project-vibe-spec init to create a PRD/PDD-aligned project progress ledger with linked requirements."
+  default_prompt: "Use $project-vibe-spec init to create a project contract and a requirement-linked progress ledger from available repository facts."
