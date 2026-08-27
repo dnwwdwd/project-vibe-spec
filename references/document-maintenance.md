@@ -16,23 +16,25 @@
 | Requirement Record | 背景、确认范围、方案、验收、依赖、影响与需求级验证 | 与需求无关的全局设计 |
 | Decision Record | 数据/架构/API 等重大方案、备选项、理由、用户确认和回滚口径 | 日常实现流水账 |
 | Bug Tracker | 现象、影响、根因、修复和验证 | 常规优化 |
-| PDD | 产品定位、范围、体验、用户流程和验收 | 低层实现细节 |
-| PRD | 技术约束、模块、接口、数据、兼容和验证 | 逐条需求流水账 |
+| PRD | 产品定位、范围、用户角色、体验、用户流程和验收 | 低层实现细节、逐条需求流水账 |
+| PDD | 技术架构、模块、接口、数据、权限、运行时、兼容和验证 | 逐条需求流水账 |
 | UI Guide | 视觉、交互、状态、组件和响应式规则 | 业务根因 |
-| Project Progress | 项目当前口径、阶段和里程碑 | 每次细节改动 |
+| Project Progress | 项目当前口径、阶段和里程碑；PRD 功能域、PDD 技术域到 REQ、状态、验证和下一步的映射 | 每次细节改动、PRD/PDD 正文副本 |
 | Feature Progress Ledger | 大任务功能进度文档的位置、状态和最近更新时间 | 阶段明细和验证证据 |
 | Feature Progress Record | 某个大任务的阶段计划、进度、DoD、证据、阻塞和下一步 | 无关任务的进度 |
 | Business Flow | 指定业务域的入口、主链路、状态、异常和边界 | 无关模块说明 |
+
+默认以 PRD 表示产品需求、PDD 表示技术设计。既有项目若使用相反命名，必须在 `DOCUMENT_MAP.md` 标明各自职责，并按实际文档内容而非文件名更新。
 
 ## 更新矩阵
 
 | 变化 | 必须更新 | 按需更新 |
 |---|---|---|
-| 新增功能 | Requirements、PDD、PRD | Decision、Flow、UI Guide、Project/Feature Progress |
-| 功能或流程优化 | Requirements、PDD、PRD | Decision、Flow、UI Guide、Project/Feature Progress |
-| UI 或交互优化 | Requirements、UI Guide | PDD、PRD、Flow、Progress |
+| 新增功能 | Requirements、PRD | PDD、Decision、Flow、UI Guide、Project/Feature Progress |
+| 功能或流程优化 | Requirements、PRD | PDD、Decision、Flow、UI Guide、Project/Feature Progress |
+| UI 或交互优化 | Requirements、UI Guide、PRD | PDD、Flow、Progress |
 | Bug 修复 | Bug Tracker | PDD、PRD、UI Guide、Flow、Progress |
-| 架构、数据、检索、Agent 或接口变化 | Requirements、Decision、PDD、PRD、Flow | UI Guide、Progress |
+| 架构、数据、检索、Agent 或接口变化 | Requirements、Decision、PDD | PRD、Flow、UI Guide、Progress |
 | 仅构建或重新打包 | 无，除非项目另有规定 | 发布说明 |
 
 ## 跨模块记录与验收
@@ -58,3 +60,5 @@
 - 大任务的需求台账填写功能进度文档链接；功能进度台账填写 REQ 链接。两处共同维护，防止文件变成孤岛。
 - Bug 如果由特定需求引入，必须链接该 REQ；功能进度文档若处理 Bug，也链接 Bug ID。
 - 完成时，需求记录、决策记录和功能进度文档都写入相同的验证证据或相互链接。
+- 项目总进度的每个“开发中”或“已完成（V1）”功能行都必须链接至少一个 REQ。没有 REQ 的计划项标为“待拆分需求”，不得在总进度中写成正在交付。
+- 关联 REQ 的状态、功能进度阶段、项目总进度对应行必须在同一轮更新；三者存在差异时，以需求记录和验证证据为准，项目总进度不得自行宣称完成。

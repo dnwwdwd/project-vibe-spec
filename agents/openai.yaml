@@ -1,4 +1,4 @@
 interface:
   display_name: "Project Vibe Spec"
-  short_description: "覆盖跨模块影响分析与实机回归的项目交付流程"
-  default_prompt: "Use $project-vibe-spec to review this repository's contract, analyze cross-module impact before implementation, and keep documentation and behavior verification traceable."
+  short_description: "建立项目契约、PRD/PDD 对齐总进度和可追溯交付记录"
+  default_prompt: "Use $project-vibe-spec init to create a PRD/PDD-aligned project progress ledger with linked requirements."

@@ -13,8 +13,8 @@
 | 决策台账 | `Decisions/LEDGER.md` | 数据、架构、API、外部依赖或难以回退的方案 |
 | 决策记录 | `Decisions/DEC-*.md` | 提出、确认、调整或归档重大方案 |
 | Bug 台账 | `docs/BUG_TRACKER.md` | 发现、修复或验证 Bug |
-| 产品设计 | `docs/PDD.md` | 产品行为、范围或用户流程变化 |
-| 技术规格 | `docs/PRD.md` | 实现、架构、接口、数据或兼容变化 |
+| 产品需求（PRD） | `docs/PRD.md` | 产品行为、范围、用户流程或验收变化 |
+| 技术设计（PDD） | `docs/PDD.md` | 实现、架构、接口、数据、权限、运行时或兼容变化 |
 | UI 规范 | `docs/UI_GUIDE.md` | UI、交互或响应式规则变化 |
 | 业务流程 | `docs/<domain>_BUSINESS_FLOW.md` | 业务、Agent、检索或数据流变化 |
 | 项目进度 | `docs/PROGRESS.md` | 当前口径或项目里程碑变化 |
