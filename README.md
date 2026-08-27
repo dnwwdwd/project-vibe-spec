@@ -30,6 +30,8 @@ git clone https://github.com/dnwwdwd/project-vibe-spec.git \
 使用 $project-vibe-spec init，读取当前仓库的 PRD/PDD，生成与需求台账关联的项目总进度。
 ```
 
+PRD 或 PDD 缺失时，`init` 会沿用已有事实、创建缺失模板并将未知范围标为“待澄清”；不会根据代码猜测产品范围或验收标准。
+
 ```text
 使用 $project-vibe-spec 修复这个问题，并同步相关文档与验证结果。
 ```
