@@ -1,4 +1,4 @@
 interface:
   display_name: "Project Vibe Spec"
-  short_description: "建立项目契约、PRD/PDD 对齐总进度和可追溯交付记录"
-  default_prompt: "Use $project-vibe-spec init to create a project contract and a requirement-linked progress ledger from available repository facts."
+  short_description: "用 AGENTS.md 路由项目规则，并追踪需求、决策与交付证据"
+  default_prompt: "Use $project-vibe-spec init to audit this repository, establish lightweight AGENTS.md routing, map authoritative project documents, and create an evidence-based delivery baseline."

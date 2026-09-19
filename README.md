@@ -1,15 +1,16 @@
 # Project Vibe Spec
 
-用于软件项目的 Vibe Coding 工作规范：在用户确认的需求与数据决策、代码、文档、测试、进度和 Git 交付之间保持同一份可追溯的事实来源。
+用于 Vibe Coding 项目的协作与交付治理：把用户确认、项目事实、设计决策、实现、验证和进度维持在同一条可追溯链路上，同时避免把所有上下文塞进一个巨大的 `AGENTS.md`。
 
-它不会替代仓库现有的 `AGENTS.md`。已有项目规则优先；本 Skill 提供一套可复制的起步模板和一条稳定的执行闭环。
+这套 Skill 默认沿用仓库已有规则和目录。根 `AGENTS.md` 只承担工作入口与任务路由，`DOCUMENT_MAP.md` 负责定位现行事实来源，REQ/DEC/PRD/PDD/Progress 分别保存需求、决策、项目事实和交付状态。
 
 ## 包含内容
 
-- `SKILL.md`：首次接入、`init` 总进度初始化、需求确认、跨模块影响分析、数据设计确认、计划、进度、文档联动、验证与交付规则。
-- `assets/governance-starter/`：新项目可复制的项目契约、目录索引、需求、决策、Bug、PDD、PRD、UI、项目进度、功能进度和业务流程模板。
-- `references/document-maintenance.md`：文档职责、更新矩阵、跨模块记录与行为验收规则。
-- `references/decision-gates.md`：需求、数据表与 DDL 变更的方案确认清单。
+- `SKILL.md`：日常任务的需求确认、决策关卡、实现、验证和交付规则。
+- `references/init-workflow.md`：可重复执行的 `init` 审计流程。
+- `references/document-maintenance.md`：文档职责、状态、更新矩阵和记录关系。
+- `references/decision-gates.md`：需求、数据模型和高风险变更的确认清单。
+- `assets/governance-starter/`：在仓库确实缺少某项职责时才使用的起步模板。
 
 ## 安装
 
@@ -18,28 +19,35 @@ git clone https://github.com/dnwwdwd/project-vibe-spec.git \
   ~/.codex/skills/project-vibe-spec
 ```
 
-重启或重新扫描 Codex 后，可在项目工作中直接调用 `$project-vibe-spec`。
+重启或重新扫描 Codex 后，可在项目中调用 `$project-vibe-spec`。
 
-## 使用示例
-
-```text
-使用 $project-vibe-spec，为这个仓库建立项目契约和需求台账。
-```
+## 初始化
 
 ```text
-使用 $project-vibe-spec init，读取当前仓库的 PRD/PDD，生成与需求台账关联的项目总进度。
+使用 $project-vibe-spec init 初始化这个仓库。
 ```
 
-PRD 或 PDD 缺失时，`init` 会沿用已有事实、创建缺失模板并将未知范围标为“待澄清”；不会根据代码猜测产品范围或验收标准。
+`init` 会先审计现有规则、文档、代码、测试和构建入口，再建立或刷新：
+
+- 根 `AGENTS.md` 的轻量任务路由；
+- `DOCUMENT_MAP.md` 的职责、状态与真实路径；
+- 当前项目确实需要的需求、决策或进度台账；
+- 有证据的交付基线。
+
+它不会为了凑齐模板自动生成空 PRD/PDD，也不会根据代码猜测产品原始需求。已有功能可以直接作为“当前实现事实”进入基线；从初始化之后新增或继续推进的工作再用 REQ/DEC/Progress 追踪。
+
+再次运行 `init` 时，应刷新已有映射和路由，不重复创建目录或覆盖仓库自己的规则。
+
+## 日常使用
 
 ```text
-使用 $project-vibe-spec 修复这个问题，并同步相关文档与验证结果。
+使用 $project-vibe-spec 完成这个需求，并同步相关事实文档和验证记录。
 ```
+
+Agent 先从当前目录适用的 `AGENTS.md` 判断本次需要读取哪些资料，再进入实现。长期稳定的产品、工程和设计规则留在各自正本文档里；能自动化保证的要求优先落到 lint、测试、类型检查或脚本。
 
 ## 边界
 
-首次接入会先审视仓库已有文档；同类目录会被沿用，缺失职责才使用模板补齐。随后将真实位置写入目标仓库根目录的 `DOCUMENT_MAP.md`，并在 `AGENTS.md` 中关联这个索引。
+模板只是缺失职责的默认结构。已有项目如果使用 `specs/`、`architecture/`、GitHub Issues、ADR 或其他组织方式，优先沿用，并在 `DOCUMENT_MAP.md` 中记录真实位置。
 
-模板提供默认结构。将技术栈、运行命令、远程仓库、部署方式、产品规则和具体业务流程写入目标项目自己的契约文档，不要写死在通用 Skill 中。
-
-`init` 是本 Skill 的初始化子命令约定。它生成或更新项目总进度，并要求后续每项功能推进关联 `Requirements/` 中的 REQ；它不替代 Codex 宿主提供的全局命令。
+`init` 是本 Skill 的子命令约定，不替代宿主工具自己的全局命令。
