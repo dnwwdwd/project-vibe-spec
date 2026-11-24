@@ -1,4 +1,4 @@
 interface:
   display_name: "Project Vibe Spec"
   short_description: "用 AGENTS.md 路由项目规则，并追踪需求、决策与交付证据"
-  default_prompt: "Use $project-vibe-spec init to audit this repository, establish lightweight AGENTS.md routing, map authoritative project documents, and create an evidence-based delivery baseline."
+  default_prompt: "使用 $project-vibe-spec init 审计当前仓库，建立轻量的 AGENTS.md 任务路由、DOCUMENT_MAP.md 文档地图与有证据的交付基线。"
